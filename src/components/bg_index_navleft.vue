@@ -23,14 +23,10 @@
                     <span slot="title">修改文章</span>
                   </el-menu-item>
                     <el-menu-item index="4">
-                    <i class="el-icon-delete"></i>
-                    <span slot="title">删除文章</span>
-                  </el-menu-item>
-                    <el-menu-item index="5">
                     <i class="el-icon-setting"></i>
                     <span slot="title">更改文章权限</span>
                   </el-menu-item>
-                    <el-menu-item index="6">
+                    <el-menu-item index="5">
                     <i class="el-icon-s-comment"></i>
                     <span slot="title">回复评论</span>
                   </el-menu-item>
@@ -46,7 +42,7 @@
         data:function () {
             return{
                 flag:true,
-                toRoutes:["/bg/websiteInfo","/bg/myArticles","/bg/issueArticle","/bg/updateArticle","/bg/deleteArticle","/bg/modifyLimits","/bg/resolveComment"]
+                toRoutes:["/bg/websiteInfo","/bg/myArticles","/bg/issueArticle","/bg/updateArticle","/bg/modifyLimits","/bg/resolveComment"]
             }
         },methods:{
             handleSelect(key) {

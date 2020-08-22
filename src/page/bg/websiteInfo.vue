@@ -85,7 +85,7 @@
         name: "websiteinfo",
         data:function(){
             return{
-                articlenum:"11",
+                articlenum:"",
                 commentnum:"",
                 starnum:"",
                 time:"",
@@ -96,8 +96,8 @@
         },
         mounted() {
             getWebsiteInfo().then(res => {
-                console.log(res.data);
-                console.log(this.articlenum);
+                //console.log(res.data);
+                ///console.log(this.articlenum);
                 this.articlenum=res.data.articlenum;
                 this.commentnum=res.data.commentnum;
                 this.starnum=res.data.starnum;

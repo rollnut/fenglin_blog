@@ -40,9 +40,7 @@ const routes = [
         path:"updateArticle",name:"updateArticle",component:() => import( '../page/bg/updateArticle.vue')
        // children: [{path:"modifyArticle",name:"modifyArticle",component:()=>import("../page/bg/modifyArticle.vue")}]
       },
-      {
-        path:"deleteArticle",name:"deleteArticle",component:() => import( '../page/bg/deleteArticle.vue')
-      },
+
       {
         path:"modifyLimits",name:"modifyLimits",prop:true,component:() => import( '../page/bg/modifyLimits.vue')
       },

@@ -11,7 +11,7 @@
             <p class="op"> <el-link :underline="false"> <span>时间:</span>{{new Date(value.date).toLocaleDateString()}}</el-link></p>
             <p class="hidden" :id="value.articleid"></p>
             <el-row class="box-foot">
-                <el-button round type="primary" @click="sendDoModify(value.articleid)">修改</el-button>  <el-button round type="danger" @click="sendDodel(value.articleid)">删除</el-button>
+                <el-button round type="primary" v-prevent-click @click="sendDoModify(value.articleid)">修改</el-button>  <el-button round type="danger" v-prevent-click @click="sendDodel(value.articleid)">删除</el-button>
             </el-row>
         </div>
 

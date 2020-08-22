@@ -51,7 +51,7 @@
              insertArticle(data).then(res=>{
                  if (res.code===200){
                       this.$message('上传成功');
-                      this.$emit("resetForm")
+                      this.resetForm()
                  }else {
                      this.$message.error('发生错误，上传失败');
                  }

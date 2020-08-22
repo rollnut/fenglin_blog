@@ -21,7 +21,7 @@
                   <el-form-item label="设为私密" >
                     <el-switch v-model="form.lock"  active-value='1'  inactive-value='0'></el-switch>
                   </el-form-item>
-                  <el-form-item label="访问密码" v-if="form.lock==1">
+                  <el-form-item label="访问密码" v-show="form.lock==1">
                     <el-input v-model="form.password" placeholder="请输入密码" show-password></el-input>
                   </el-form-item>
 
@@ -105,6 +105,7 @@
             },
              reset(){
                  this.$emit("resetForm")
+
              },
              handleClose(tag) {
                 this.form.tag.splice(this.form.tag.indexOf(tag), 1);

@@ -34,6 +34,8 @@
                 this.form=res.data;
                 this.form.alock=this.form.alock.toString();
                 this.form.openview=this.form.openview.toString();
+                this.form.tag=this.form.tag[0].split(",")
+                console.log(this.form.tag);
             });
 
         },methods:{
@@ -61,8 +63,7 @@
                 data.append("type",this.form.type);
                 data.append("content",this.form.content);
                 data.append("articleid",this.articleid);
-              console.log("upid",this.articleid);
-              updateArticle(data).then(res=>{
+                updateArticle(data).then(res=>{
                  console.log(res);
                  if (res.code===200){
                       this.$message('上传成功');
@@ -70,7 +71,7 @@
                  }else {
                      this.$message.error('发生错误，上传失败');
                  }
-             });
+                 });
           }
         }
 

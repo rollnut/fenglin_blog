@@ -5,7 +5,7 @@
                <div class="classBar">
                     <p  >
                         <span class="title">分类:</span>
-                        <el-button type="info" plain v-for=" (value,index) in type" v-bind:key="index"
+                        <el-button type="info" plain v-for=" (value,index) in type" v-bind:key="index" v-prevent-click
                                    v-bind:class="{ active:index===current}" @click="addClass(index,$event)">
                              <span>{{value}}</span>
                         </el-button>
