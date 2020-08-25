@@ -52,7 +52,8 @@ const routes = [
     redirect:"/bg/websiteInfo"
   },{
     path: '/',
-    name: 'public',
+    alias:"/index",
+    name: 'font',
     component:() => import( '../page/index.vue')
   }
 ];
