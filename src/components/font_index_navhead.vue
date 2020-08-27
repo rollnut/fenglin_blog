@@ -6,6 +6,7 @@
               <el-input
                     v-model="search"
                      size="medium"
+                    @input="emitListener(search)"
                      placeholder="输入关键字搜索"/>
           </el-menu-item>
           <el-menu-item index="1">主页</el-menu-item>
@@ -22,8 +23,10 @@
 </template>
 
 <script>
+    import store from '../store/index'
     export default {
         name: "font_index_navhead",
+        store,
         data:function () {
             return {
                 activeIndex:"",
@@ -32,8 +35,11 @@
         },methods:{
             handleSelect(val){
                 console.log(val);
+            },emitListener(val){
+                this.$store.commit("setSearch",val);
+                //this.$store.state.search=val;//保存搜索框的值
             }
-        }
+        },
     }
 </script>
 

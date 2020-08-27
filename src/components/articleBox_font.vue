@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="article_content"  v-for="(value,index) in eventType(search)" v-bind:key="index">
+        <div class="article_content"  v-for="(value,index) in articles.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase()))" v-bind:key="index">
             <h4 class="title"><el-link :underline="false" :href="'/bg/article?articleid='+value.articleid">{{value.title}} </el-link></h4>
                     <div class="tags">
                         <el-tag v-for=" (x,index) in value.tag.split(',')" :type="randcss()" v-bind:key="index"
@@ -8,15 +8,25 @@
                         </el-tag>
                     </div>
             <p class="desc">{{value.description}} <span>... <el-link type="primary" :href="'/bg/article?articleid='+value.articleid">查看更多</el-link></span></p>
-            <p class="op"> <el-link :underline="false"> <span>时间:</span>{{new Date(value.date).toLocaleDateString()}}</el-link></p>
+            <p class="op">
+                <el-link :underline="false"  class="view"><i class="el-icon-view"> </i><span>{{value.clicks}}</span></el-link>
+                <el-link :underline="false" class="star"  @click="handleStar(value.articleid)"><img src="../assets/star.png"/></el-link>
+                <el-link :underline="false" class="unstar" @click="handleUnStar(value.articleid)"><img src="../assets/unstar.png"/></el-link>
+                <el-link :underline="false" class="actime"><span>时间:</span>{{new Date(value.date).toLocaleDateString()}}</el-link>
+
+            </p>
+
         </div>
 
     </div>
 </template>
 
 <script>
+    import store from "../store/index"
+    import {star,unstar} from "../api/font/all"
     export default {
         name: "articleBox",
+        store,
         data:function () {
             return{
                  tagCss:["success","info","warning",""]
@@ -24,22 +34,51 @@
         }
         ,props:{
             articles:Array,
-            currentType:String
+            search:String
         },
         methods:{
-            eventType(name){
-                return this.articles.filter(function (obj) {
-                    if (name==="全部")
-                        return  obj;
-                    else {
-                         return obj.type===name
-                    }
-                })
-            },
             randcss(){
                 return this.tagCss[Math.floor(Math.random() * (3))]
+            },
+            handleStar(val){
+                let flag=1;
+                if (this.$cookies.isKey(val)){
+                    flag=this.$cookies.get(val);
+                }
+                star({articleid:val,flag:flag}).then(res=>{
+                       // console.log(res);
+                        if (res.code===200){
+                            this.$message("点赞成功");
+                            this.$cookies.set(val,0)
+                        }
+                        if (res.code===201){
+                            this.$message("点赞取消");
+                            this.$cookies.set(val,1)
+                        }
+                    })
+
+
+            },
+            handleUnStar(val){
+                let flag=1;
+                if(this.$cookies.isKey(`u`+val)){
+                   flag=this.$cookies.get(`u`+val);
+                    console.log(flag);
+                }
+                unstar({articleid:val,flag:flag}).then(res=>{
+                        //console.log(res);
+                        if (res.code===200){
+                            this.$message("踩成功");
+                            this.$cookies.set(`u`+val,0)
+                        }
+                        if (res.code===201){
+                            this.$message("踩取消");
+                            this.$cookies.set(`u`+val,1)
+                        }
+                    })
+                }
             }
-        }
+
     }
 </script>
 
@@ -61,6 +100,7 @@
          p{
              white-space: pre;
          }
+
     }
     .desc{
         margin: 5px 2px;
@@ -76,6 +116,22 @@
         margin: 15px 2px;
         color: #888;
         padding-left: 5px;
+        img{
+            width: 22px;
+            height: 22px;
+
+        }
+        .view{
+            margin:  0px 3%;
+        }
+        .star,.unstar{
+            margin:  0px 10%;
+        }
+        .actime{
+            position: relative;
+            float: right;
+            margin-right: 5%;
+        }
     }
     .title {
         margin: 0;

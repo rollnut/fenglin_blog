@@ -2,18 +2,11 @@
     <div class="index">
         <el-container class="head_underLine" >
                     <h1 class="logo">枫林的个人博客</h1>
-                    <font_navHead >
-                    </font_navHead>
+                    <font_navHead></font_navHead>
         </el-container>
         <div class="ct-main">
-                <el-container>
-                    <el-main>
-                        主题
-                    </el-main>
-                    <el-aside>
-                        侧边
-                    </el-aside>
-                </el-container>
+                <Home :articles="articles" :tags="tag"></Home>
+                <router-view></router-view>
         </div>
         <el-container>
                 <el-footer >
@@ -27,21 +20,42 @@
 </template>
 
 <script>
+    import store from '../store/index'
     import {getArticles} from  '../api/font/all'
     import font_navHead from "../components/font_index_navhead"
+    import Home from "./font/Home"
     export default {
         name: "index",
+        store,
         data:function () {
             return {
-
+                articles:[],
+                tag:[]
             }
         },
         components:{
-            font_navHead
+            font_navHead,
+            Home
         },mounted() {
-            getArticles().then((res)=>{
-                console.log(res);
+            getArticles({}).then((res)=>{
+                if (res.code===200){
+                    console.log(res);
+                     this.articles=res.data;
+                    for( let x in res.data){
+                        this.tag=[...this.tag,...res.data[x].tag.split(",")];
+                        this.tag=[...new Set(this.tag)];
+                    }
+                }else {
+                    console.log(res.msg);
+                }
             })
+        },methods:{
+/*            handlesearch(vals){
+                //filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase()))
+                console.log(vals);
+                let articles= this.articles;
+                 this.articles=articles.filter(articles=>!vals||articles.title.toLowerCase().includes(vals.toLowerCase()));
+            }*/
         }
 
     }

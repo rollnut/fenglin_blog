@@ -61,6 +61,7 @@
             console.log(res.data);
             for (let x in res.data){
                 this.tag=[...this.tag,...res.data[x].tag.split(",")];
+                this.tag=[...new Set(this.tag)];
                 this.type.push(res.data[x].type);
             }
              this.type=[...new Set(this.type)];
