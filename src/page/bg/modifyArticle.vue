@@ -35,7 +35,6 @@
                 this.form.alock=this.form.alock.toString();
                 this.form.openview=this.form.openview.toString();
                 this.form.tag=this.form.tag[0].split(",")
-                console.log(this.form.tag);
             });
 
         },methods:{

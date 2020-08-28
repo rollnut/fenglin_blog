@@ -1,7 +1,7 @@
 <template>
     <div class="tags">
         <el-card class="box-card" shadow="never">
-                  <h1>{{title}}</h1>
+                  <h5>{{title}}</h5>
                    <div class="tags">
                        <el-tag v-for=" (x,index) in tag" :type="randcss()" v-bind:key="index"  style="margin: 5px 4px">
                            {{x}}

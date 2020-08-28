@@ -54,7 +54,22 @@ const routes = [
     path: '/',
     alias:"/index",
     name: 'font',
-    component:() => import( '../page/index.vue')
+    component:() => import( '../page/index.vue'),
+    children: [
+      {
+        path:"Home",name:"Home",component:()=>import("../page/font/Home"),
+      },
+      {
+        path:"articles",name:"articles",component:()=>import("../page/font/articles"),
+      },
+      {
+        path:"contact",name:"contact",component:()=>import("../page/font/contact"),
+      },
+      {
+         path:"articleDetail",name:"articleDetail",component:()=>import("../page/font/articleDetail"),
+      }
+    ],
+    redirect: "/Home"
   }
 ];
 

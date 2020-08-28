@@ -2,10 +2,9 @@
     <div class="index">
         <el-container class="head_underLine" >
                     <h1 class="logo">枫林的个人博客</h1>
-                    <font_navHead></font_navHead>
+                    <font_navHead :type="type"></font_navHead>
         </el-container>
         <div class="ct-main">
-                <Home :articles="articles" :tags="tag"></Home>
                 <router-view></router-view>
         </div>
         <el-container>
@@ -23,19 +22,18 @@
     import store from '../store/index'
     import {getArticles} from  '../api/font/all'
     import font_navHead from "../components/font_index_navhead"
-    import Home from "./font/Home"
     export default {
         name: "index",
         store,
         data:function () {
             return {
                 articles:[],
-                tag:[]
+                tag:[],
+                type:[]
             }
         },
         components:{
             font_navHead,
-            Home
         },mounted() {
             getArticles({}).then((res)=>{
                 if (res.code===200){
@@ -43,8 +41,11 @@
                      this.articles=res.data;
                     for( let x in res.data){
                         this.tag=[...this.tag,...res.data[x].tag.split(",")];
-                        this.tag=[...new Set(this.tag)];
+                        this.type.push(res.data[x].type);
                     }
+                    this.tag=[...new Set(this.tag)];
+                    this.type=[...new Set(this.type)];
+
                 }else {
                     console.log(res.msg);
                 }
@@ -74,6 +75,7 @@
  }
 .ct-main {
     min-height: 100%;
+    padding-top: 20px;
 }
     .index{
         height: 100%;

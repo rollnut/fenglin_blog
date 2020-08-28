@@ -14,7 +14,6 @@
                 <div class="articleList">
                     <i class="el-icon-s-flag"></i>
                     文章列表
-
                 </div>
                 <articleBox v-bind:articles="articles" v-bind:current-type="currentType"></articleBox>
             </el-col>

@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="article_content"  v-for="(value,index) in articles.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase()))" v-bind:key="index">
-            <h4 class="title"><el-link :underline="false" :href="'/bg/article?articleid='+value.articleid">{{value.title}} </el-link></h4>
+        <div class="article_content"  v-for="(value,index) in eventType(currentType)" v-bind:key="index">
+            <h4 class="title"> <el-link  :underline="false" class="route-link" @click="handeArticle(value)"> {{value.title}}</el-link></h4>
                     <div class="tags">
                         <el-tag v-for=" (x,index) in value.tag.split(',')" :type="randcss()" v-bind:key="index"
                                 style="margin: 5px 4px">{{x}}
                         </el-tag>
                     </div>
-            <p class="desc">{{value.description}} <span>... <el-link type="primary" :href="'/bg/article?articleid='+value.articleid">查看更多</el-link></span></p>
+            <p class="desc">{{value.description}} <span>...<el-link @click="handeArticle(value)" type="primary"> 查看更多</el-link></span></p>
             <p class="op">
                 <el-link :underline="false"  class="view"><i class="el-icon-view"> </i><span>{{value.clicks}}</span></el-link>
                 <el-link :underline="false" class="star"  @click="handleStar(value.articleid)"><img src="../assets/star.png"/></el-link>
@@ -34,12 +34,45 @@
         }
         ,props:{
             articles:Array,
-            search:String
+            search:String,
+            currentType:String
         },
         methods:{
             randcss(){
                 return this.tagCss[Math.floor(Math.random() * (3))]
             },
+            handeArticle(val){
+                if (parseInt(val.alock)===1){//文章上锁
+                                        this.$prompt('请输入文章密码', {
+                                      confirmButtonText: '确定',
+                                      cancelButtonText: '取消',
+                                      inputPattern: /^.{4,}$/,
+                                      inputErrorMessage: '密码不少于4位',
+                                      inputType:'password'
+                                    }).then(({ value }) => {
+                                            this.$router.push({name:'articleDetail',query:{articleid:val.articleid,password:value}});
+
+                                    }).catch(() => {
+                                            this.$message({
+                                                type: 'info',
+                                                message: '取消输入'
+                                            });
+                                        });
+                }else{
+                    this.$router.push({name:'articleDetail',query:{articleid:val.articleid}})
+                }
+
+            },
+            eventType(name){
+                return this.articles.filter(function (obj) {
+                    if (name==="全部"||name===null)
+                        return  obj;
+                    else {
+                         return obj.type===name
+                    }
+                }).filter(data => !this.search || data.title.toLowerCase().includes(this.search.toLowerCase()))
+            }
+            ,
             handleStar(val){
                 let flag=1;
                 if (this.$cookies.isKey(val)){
@@ -142,6 +175,7 @@
             font-size: 20px;
             font-weight: 100;
         }
-
     }
+
+
 </style>
