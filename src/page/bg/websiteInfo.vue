@@ -96,15 +96,20 @@
         },
         mounted() {
             getWebsiteInfo().then(res => {
+                if(res.code===200){
+                    this.articlenum=res.data.articlenum;
+                    this.commentnum=res.data.commentnum;
+                    this.starnum=res.data.starnum;
+                    this.time=new Date(res.data.time).toLocaleString();
+                    this.unstarnum=res.data.unstarnum;
+                    this.visitorsnum=res.data.visitorsnum;
+                    this.os=res.data.os;
+                }else {
+                    console.log(res.msg);
+                }
                 //console.log(res.data);
                 ///console.log(this.articlenum);
-                this.articlenum=res.data.articlenum;
-                this.commentnum=res.data.commentnum;
-                this.starnum=res.data.starnum;
-                this.time=new Date(res.data.time).toLocaleString();
-                this.unstarnum=res.data.unstarnum;
-                this.visitorsnum=res.data.visitorsnum;
-                this.os=res.data.os;
+
             })
         },
         components:{careddiv}

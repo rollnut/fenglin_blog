@@ -1,13 +1,13 @@
 <template>
     <div>
         <div class="article_content"  v-for="(value,index) in eventType(currentType)" v-bind:key="index" ref="">
-            <h4 class="title"><el-link :underline="false" :href="'/bg/article?articleid='+value.articleid">{{value.title}} </el-link></h4>
+            <h4 class="title"><el-link :underline="false" @click="handlelip(value.articleid)">{{value.title}} </el-link></h4>
                     <div class="tags">
                         <el-tag v-for=" (x,index) in value.tag.split(',')" :type="randcss()" v-bind:key="index"
                                 style="margin: 5px 4px">{{x}}
                         </el-tag>
                     </div>
-            <p class="desc">{{value.description}} <span>... <el-link type="primary" :href="'/bg/article?articleid='+value.articleid">查看更多</el-link></span></p>
+            <p class="desc">{{value.description}} <span>... <el-link type="primary" @click="handlelip(value.articleid)">查看更多</el-link></span></p>
             <p class="op"> <el-link :underline="false"> <span>时间:</span>{{new Date(value.date).toLocaleDateString()}}</el-link></p>
             <p class="hidden" :id="value.articleid"></p>
             <el-row class="box-foot">
@@ -49,6 +49,9 @@
             },
             sendDodel(id){
                 this.$emit("doDel",id)
+            },
+            handlelip(val){
+                this.$router.push({path:"/bg/articleDetail",query:{articleid:val}})
             }
         }
     }

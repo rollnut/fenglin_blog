@@ -8,10 +8,14 @@
                 <router-view></router-view>
         </div>
         <el-container>
-                <el-footer >
-                    这是脚注信息
+                <el-footer>
+                    <myfooter></myfooter>
                 </el-footer>
         </el-container>
+        <template>
+                <el-backtop target=".index" :bottom="50"  :right="100"></el-backtop>
+        </template>
+
     </div>
 
 
@@ -22,6 +26,7 @@
     import store from '../store/index'
     import {getArticles} from  '../api/font/all'
     import font_navHead from "../components/font_index_navhead"
+    import myfooter from "../components/myfooter"
     export default {
         name: "index",
         store,
@@ -33,11 +38,12 @@
             }
         },
         components:{
-            font_navHead,
+            font_navHead:font_navHead,
+            myfooter:myfooter
         },mounted() {
             getArticles({}).then((res)=>{
                 if (res.code===200){
-                    console.log(res);
+                    //console.log(res);
                      this.articles=res.data;
                     for( let x in res.data){
                         this.tag=[...this.tag,...res.data[x].tag.split(",")];
@@ -66,7 +72,7 @@
 .logo{
     display: block;
     float: left;
-    margin-left: 250px;
+    margin-left: 15%;
     color: #409EFF;
 }.head_underLine{
     border-bottom: #EBEEF5 1px solid;
@@ -79,5 +85,7 @@
 }
     .index{
         height: 100%;
+        overflow:auto;
     }
+
 </style>

@@ -45,7 +45,7 @@
 </template>
 
 <script>
-    import {doLogIn} from "../api/bg/login.js"
+    import {doLogIn} from "../api/bg/log.js"
     export default {
         name: "login",
         data:function () {

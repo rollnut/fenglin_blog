@@ -4,12 +4,10 @@
         <p>博客: <span class="p-item">{{articleNum}}</span></p>
         <p><img src="../assets/star.png" alt="点赞"><span class="p-item">{{star}}</span></p>
         <p><img src="../assets/unstar.png" alt="点赞"><span class="p-item">{{unstar}}</span></p>
-        <contactCode></contactCode>
     </div>
 </template>
 
 <script>
-    import contactCode from "./contactCode"
     import {getWebsiteInfo} from "../api/bg/all"
     export default {
         name: "UserInfo",
@@ -21,14 +19,18 @@
             }
         },
         components:{
-            contactCode
         },
         mounted() {
             getWebsiteInfo().then((res)=>{
-                console.log(res);
-                this.articleNum=res.data.articlenum;
-                this.star=res.data.starnum;
-                this.unstar=res.data.unstarnum;
+               // console.log(res);
+                if (res.code===200){
+                    this.articleNum=res.data.articlenum;
+                    this.star=res.data.starnum;
+                    this.unstar=res.data.unstarnum;
+                }else {
+                    console.log(res.msg);
+                }
+
             })
         }
     }
@@ -36,11 +38,11 @@
 
 <style scoped lang="less">
 .userInfoWall{
-    min-height:300px;
-    border-left:1px solid #888888;
+    min-height:200px;
     font-size:16px;
     line-height: 18px;
     margin: 15px 0;
+    color: #606266;
     p{
         text-align: left;
         padding-left: 25px;

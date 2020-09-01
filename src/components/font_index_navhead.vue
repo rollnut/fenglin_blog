@@ -16,8 +16,9 @@
                   <el-menu-item :index="x" @click="handleType(x)">{{x}}</el-menu-item>
               </div>
           </el-submenu>
-            <el-menu-item index="4" @click="to('contact')">关于本站</el-menu-item>
-          <el-menu-item index="3" disabled>更多板块</el-menu-item>
+            <el-menu-item index="3" @click="to('timeline')">时光轴</el-menu-item>
+          <el-menu-item index="4" @click="to('about')">关于本站</el-menu-item>
+          <el-menu-item index="5" disabled>更多板块</el-menu-item>
         </el-menu>
     </div>
 </template>

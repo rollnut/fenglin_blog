@@ -11,7 +11,7 @@
             return{
                 form: {
                     title: '',
-                    openview: '1',
+                    openview: '0',
                     alock: '0',
                     description:"",
                     password: "",
@@ -28,7 +28,7 @@
           resetForm(){
             this.form={
                     title: '',
-                    openview: '1',
+                    openview: '0',
                     alock: '0',
                     description:"",
                     password: "",
@@ -43,7 +43,7 @@
                 data.append("openview",this.form.openview);
                 data.append("alock",this.form.alock);
                 data.append("description",this.form.description);
-                if ( this.form.alock===1){data.append("password",this.form.password);}
+                if ( this.form.alock=='1'){data.append("password",this.form.password);}
                 data.append("tag",this.form.tag);
                 data.append("type",this.form.type);
                 data.append("content",this.form.content);

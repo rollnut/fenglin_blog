@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
-//import {doLogIn} from "../api/bg/login"
-////const whiteList=["/login","/"];
+import {doLogIn} from "../api/bg/log"
+const whiteList=["/login","/Home","/about","/articles","/","/articleDetail","/index",'/timeline'];
 /**
  * 重写路由的push方法
  */
@@ -47,7 +47,12 @@ const routes = [
       {
         path:"resolveComment",name:"resolveComment",component:() => import( '../page/bg/resolveComment.vue')
       },
-      {path:"modifyArticle",name:"modifyArticle",component:()=>import("../page/bg/modifyArticle.vue")}
+      {
+        path:"modifyArticle",name:"modifyArticle",component:()=>import("../page/bg/modifyArticle.vue")
+      },
+      {
+        path:"articleDetail",name:"articleDetail",component:()=>import("../page/bg/articleDetail.vue")
+      }
     ],component:() => import( '../page/bg/index.vue'),
     redirect:"/bg/websiteInfo"
   },{
@@ -63,10 +68,13 @@ const routes = [
         path:"articles",name:"articles",component:()=>import("../page/font/articles"),
       },
       {
-        path:"contact",name:"contact",component:()=>import("../page/font/contact"),
+        path:"about",name:"about",component:()=>import("../page/font/about"),
       },
       {
          path:"articleDetail",name:"articleDetail",component:()=>import("../page/font/articleDetail"),
+      },
+      {
+         path:"timeline",name:"timeline",component:()=>import("../page/font/timeline"),
       }
     ],
     redirect: "/Home"
@@ -78,7 +86,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
-/*router.beforeEach((to,from,next)=>{
+router.beforeEach((to,from,next)=>{
   if (whiteList.includes(to.path)===true){//过滤不需要登陆的页面需要
     next();
   }else {
@@ -90,5 +98,5 @@ const router = new VueRouter({
         }
   })
   }
-  });*/
+  });
 export default router

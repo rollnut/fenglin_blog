@@ -14,5 +14,5 @@
   width: 100%;
   height: 100%;
 }
-html,body{ width: 100%;height: 100%; margin: 0 auto;}
+html,body{ width: 100%;height: 100%; margin: 0 auto;min-width: 1125px}
 </style>

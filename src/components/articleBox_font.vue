@@ -10,8 +10,8 @@
             <p class="desc">{{value.description}} <span>...<el-link @click="handeArticle(value)" type="primary"> 查看更多</el-link></span></p>
             <p class="op">
                 <el-link :underline="false"  class="view"><i class="el-icon-view"> </i><span>{{value.clicks}}</span></el-link>
-                <el-link :underline="false" class="star"  @click="handleStar(value.articleid)"><img src="../assets/star.png"/></el-link>
-                <el-link :underline="false" class="unstar" @click="handleUnStar(value.articleid)"><img src="../assets/unstar.png"/></el-link>
+                <!--<el-link :underline="false" class="star"  @click="handleStar(value.articleid)"><img src="../assets/star.png"/></el-link>
+                <el-link :underline="false" class="unstar" @click="handleUnStar(value.articleid)"><img src="../assets/unstar.png"/></el-link>-->
                 <el-link :underline="false" class="actime"><span>时间:</span>{{new Date(value.date).toLocaleDateString()}}</el-link>
 
             </p>
@@ -42,6 +42,7 @@
                 return this.tagCss[Math.floor(Math.random() * (3))]
             },
             handeArticle(val){
+                //console.log(val.alock);
                 if (parseInt(val.alock)===1){//文章上锁
                                         this.$prompt('请输入文章密码', {
                                       confirmButtonText: '确定',
@@ -50,7 +51,7 @@
                                       inputErrorMessage: '密码不少于4位',
                                       inputType:'password'
                                     }).then(({ value }) => {
-                                            this.$router.push({name:'articleDetail',query:{articleid:val.articleid,password:value}});
+                                            this.$router.push({path:'/articleDetail',query:{articleid:val.articleid,password:value}});
 
                                     }).catch(() => {
                                             this.$message({
@@ -59,7 +60,7 @@
                                             });
                                         });
                 }else{
-                    this.$router.push({name:'articleDetail',query:{articleid:val.articleid}})
+                    this.$router.push({path:'/articleDetail',query:{articleid:val.articleid}})
                 }
 
             },
@@ -89,14 +90,12 @@
                             this.$cookies.set(val,1)
                         }
                     })
-
-
             },
             handleUnStar(val){
                 let flag=1;
                 if(this.$cookies.isKey(`u`+val)){
                    flag=this.$cookies.get(`u`+val);
-                    console.log(flag);
+                    //console.log(flag);
                 }
                 unstar({articleid:val,flag:flag}).then(res=>{
                         //console.log(res);
