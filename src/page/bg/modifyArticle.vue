@@ -16,7 +16,7 @@
                 articleid:"",
                 form: {
                     title: '',
-                    openview: '1',
+                    openview: '0',
                     alock: '0',
                     description:"",
                     password: "",
@@ -28,22 +28,21 @@
         },mounted(){
             let articleid=this.$route.query.articleid.replace(/"/g, "");
             this.articleid=articleid;
-            console.log(this.articleid);
+           // console.log(this.articleid);
             getArticle({articleid}).then((res)=>{
                 //console.log(res);
                 this.form=res.data;
                 this.form.alock=this.form.alock.toString();
                 this.form.openview=this.form.openview.toString();
                 this.form.tag=this.form.tag[0].split(",")
-                console.log(this.form.tag);
             });
 
         },methods:{
             resetForm(){
-                console.log("reset");
+                //console.log("reset");
                 this.form={
                         title: '',
-                        openview: '1',
+                        openview: '0',
                         alock: '0',
                         description:"",
                         password: "",
@@ -58,13 +57,13 @@
                 data.append("openview",this.form.openview);
                 data.append("alock",this.form.alock);
                 data.append("description",this.form.description);
-                if ( this.form.alock==='1'){data.append("password",this.form.password);}
+                if ( this.form.alock=='1'){data.append("password",this.form.password);}
                 data.append("tag",this.form.tag);
                 data.append("type",this.form.type);
                 data.append("content",this.form.content);
                 data.append("articleid",this.articleid);
                 updateArticle(data).then(res=>{
-                 console.log(res);
+                 //console.log(res);
                  if (res.code===200){
                       this.$message('上传成功');
                       this.$emit("resetForm")

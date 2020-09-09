@@ -66,8 +66,13 @@
             }
         },mounted() {
             getArticleMin().then(res=>{
-            console.log(res.data);
-             this.tableData=res.data
+            //console.log(res.data);
+                if (res.code===200){
+                     this.tableData=res.data
+                }else {
+                    console.log(res.msg);
+                }
+
 
         });
         },methods:{

@@ -1,5 +1,6 @@
 import http from '../public'
-const BaseUrl="http://localhost:8009/bg";
+const BaseUrl="http://www.fenglingg.cn/apis/bg";
+//const BaseUrl="http://www.fenglingg.cn:8888/bg";
 export const getWebsiteInfo=function (params) {return http.fetchGet(`${BaseUrl}/getwebsiteinfo`,params);};
 export const getArticleMin=function (params) {return http.fetchGet(`${BaseUrl}/getarticlemin`,params);};
 export const getArticle=function (params) {return http.fetchGet(`${BaseUrl}/getarticle`,params);};

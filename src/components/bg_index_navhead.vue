@@ -8,11 +8,10 @@
                 <el-menu
                   class="el-menu-demo"
                   mode="horizontal"
-                  @select="handleSelect"
                   background-color="#409EFF"
                   text-color="#fff"
                   active-text-color="#ffd04b">
-                  <el-menu-item index="1"> 退出</el-menu-item>
+                  <el-menu-item index="1"  @click="handleLogout()"> 退出</el-menu-item>
                 </el-menu>
             </el-col>
         </el-row>
@@ -20,6 +19,7 @@
 </template>
 
 <script>
+    import {doLogout} from "../api/bg/log"
     export default {
         name: "bg_index_navhead",
         data() {
@@ -27,8 +27,20 @@
           };
         },
         methods: {
-          handleSelect(key, keyPath) {
-            console.log(key, keyPath);
+          handleLogout() {
+            doLogout().then(res=>{
+                if (res.code===200){
+                       this.$message({
+                        message: '您已退出登陆',
+                        type: 'success'
+                       });
+                       this.$router.replace({path:"/login"});
+                } else {
+                    console.log(res);
+                    console.log("退出失败")
+                }
+            })
+
           }
         }
     }

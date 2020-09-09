@@ -52,19 +52,25 @@
                 this.$router.push({name:"modifyArticle",query:{articleid:JSON.stringify(id)}})
             }//处理监听点击修改事件
             ,doDel(id){
-                console.log(typeof id);
+                //console.log(typeof id);
             if (id.toString().length>0){
                 deleteArticle({articleid:id.toString()}).then((res)=>{
-                    console.log(res);
+                    //console.log(res);
 
                     if (res.code === 200){
                         getArticleMin().then(res=>{
-                            for (let x in res.data){
+                            if (res.code===200){
+                                for (let x in res.data){
                                 this.tag=[...this.tag,...res.data[x].tag.split(",")];
                                 this.type.push(res.data[x].type);
+                                }
+                                 this.type=[...new Set(this.type)];
+                                 this.articles=res.data
+                            }else {
+                                console.log(res.msg);
                             }
-                             this.type=[...new Set(this.type)];
-                             this.articles=res.data
+
+
 
                         });
                     }
@@ -75,13 +81,16 @@
 
         },mounted() {
             getArticleMin().then(res=>{
-            console.log(res.data);
-            for (let x in res.data){
-                this.tag=[...this.tag,...res.data[x].tag.split(",")];
-                this.type.push(res.data[x].type);
-            }
-             this.type=[...new Set(this.type)];
-             this.articles=res.data
+            //console.log(res.data);
+                if (res.code===200){
+                    for (let x in res.data){
+                    this.tag=[...this.tag,...res.data[x].tag.split(",")];
+                    this.type.push(res.data[x].type);
+                }
+                 this.type=[...new Set(this.type)];
+                 this.articles=res.data
+                }
+
 
         });
         }
