@@ -69,9 +69,9 @@
         background-color: #fff;
         min-height: 180px;
         border: #eee solid 1px;
-        padding: 20px 20px 0;
+        padding: 20px 20px;
         text-align: left;
-         margin: 4px 0px;
+         margin: 4px 0;
          p{
              white-space: pre;
          }

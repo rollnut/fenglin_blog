@@ -1,6 +1,6 @@
 <template>
         <div class="myfooter">
-            <p>Copyright © 2020-2021 枫林的个人博客 All Rights Reserved. 备案号:蜀ICP备2020026266号-1</p>
+            <p>Copyright © 2020-2021 枫林的个人博客 powered by Node. 备案号:蜀ICP备2020026266号-1</p>
         </div>
 </template>
 

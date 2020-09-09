@@ -1,32 +1,28 @@
 <template>
     <div class="index">
-        <el-container class="head_underLine" >
+            <el-container class="head_underLine" >
                     <h1 class="logo">枫林的个人博客</h1>
                     <font_navHead :type="type"></font_navHead>
-        </el-container>
-        <div class="ct-main">
-                <router-view></router-view>
-        </div>
-        <el-container>
-                <el-footer>
-                    <myfooter></myfooter>
-                </el-footer>
-        </el-container>
-        <template>
-                <el-backtop target=".index" :bottom="50"  :right="100"></el-backtop>
-        </template>
-
+            </el-container>
+            <div class="ct-main">
+                    <router-view></router-view>
+            </div>
+            <el-container>
+                    <el-footer>
+                        <myfooter></myfooter>
+                    </el-footer>
+            </el-container>
+            <template>
+                <el-backtop target=".index " :bottom="50"  :right="100"></el-backtop>
+            </template>
     </div>
-
-
-
 </template>
 
 <script>
-    import store from '../store/index'
-    import {getArticles} from  '../api/font/all'
-    import font_navHead from "../components/font_index_navhead"
-    import myfooter from "../components/myfooter"
+    import store from '../../store'
+    import {getArticles} from '../../api/font/all'
+    import font_navHead from "../../components/font_index_navhead"
+    import myfooter from "../../components/myfooter"
     export default {
         name: "index",
         store,
@@ -80,12 +76,11 @@
     height: 60px;
  }
 .ct-main {
-    min-height: 100%;
+    min-height: 90%;
     padding-top: 20px;
 }
-    .index{
-        height: 100%;
-        overflow:auto;
-    }
+.index{
+    height: 100%;
 
+}
 </style>

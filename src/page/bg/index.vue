@@ -1,11 +1,10 @@
 <template>
     <div class="bg_index">
-        <el-container style="min-height:100%">
-
+        <el-container>
           <el-header>
               <bg_index_navhead></bg_index_navhead>
           </el-header>
-          <el-container style="min-height:100%">
+          <el-container>
             <el-aside >
                <bg_index_navleft></bg_index_navleft>
             </el-aside>
@@ -19,9 +18,6 @@
                 <bgFooter></bgFooter>
             </el-footer>
         </el-container>
-        <template>
-                <el-backtop target="html .bg_index" :bottom="50"  :right="100"></el-backtop>
-        </template>
     </div>
 </template>
 
@@ -47,9 +43,5 @@
 <style scoped lang="less">
     .el-aside{
         overflow: hidden;
-    }
-    .bg_index{
-        overflow:auto;
-        height: 100%;
     }
 </style>

@@ -45,7 +45,7 @@
 </template>
 
 <script>
-    import {doLogIn} from "../api/bg/log.js"
+    import {doLogIn} from "../../api/bg/log.js"
     export default {
         name: "login",
         data:function () {
@@ -124,7 +124,7 @@
     .login{
         background-color: rgba(250,200,50,0.7);
         width: 100%;
-        height: 100%;
+       min-height: 700px;
         background-color: #7347d7;
         display: flex;
         background-image: linear-gradient(-90deg,#7347d7,#435ad3);
