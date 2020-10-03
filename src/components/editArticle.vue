@@ -11,14 +11,13 @@
                   </el-form-item>
                   <mavon-editor class="me" ref="md" @imgAdd="$imgAdd" @imgDel="$imgDel" v-model="form.content"></mavon-editor>
                   <el-divider></el-divider>
-                  <el-form-item label="开启评论" prop="openview">
+
+                  <el-form-item label="开启评论" v-if="form.power" prop="openview">
                  <!-- <el-switch v-model="form.openview" active-value="1" inactive-value="0"></el-switch>-->
                       <el-switch v-model="form.openview" active-value="1" inactive-value="0">
                       </el-switch>
-
                   </el-form-item>
-
-                  <el-form-item label="设为私密" prop="lock" >
+                  <el-form-item label="设为私密" v-if="form.power" prop="lock" >
                     <el-switch v-model="form.alock"  active-value='1'  inactive-value='0'></el-switch>
                   </el-form-item>
                   <el-form-item label="访问密码" v-show="form.alock==1" prop="password">

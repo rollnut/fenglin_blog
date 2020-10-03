@@ -10,6 +10,8 @@ const Thunk = function (fn) {
         }
     }
 };
+const fetchget=Thunk(axios.get);
+fetchget(url,params)(callback);
 export default {
     fetchGet(url,params){
     return new Promise((resolve,reject)=>{
@@ -31,4 +33,3 @@ export default {
     })
     }
 }
-

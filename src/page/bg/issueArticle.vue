@@ -17,7 +17,8 @@
                     password: "",
                     content: "",
                     tag:[],
-                    type:""
+                    type:"",
+                    power:true,
                 }
             }
         },
@@ -34,7 +35,8 @@
                     password: "",
                     content: "",
                     tag:[],
-                    type:""
+                    type:"",
+
                 }
           },
           onSubmit(){
