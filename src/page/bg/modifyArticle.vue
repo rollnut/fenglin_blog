@@ -22,7 +22,8 @@
                     password: "",
                     content: "",
                     tag:[],
-                    type:""
+                    type:"",
+                    power:false,//关闭修改权限
                 }
             }
         },mounted(){
